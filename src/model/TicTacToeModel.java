@@ -1,17 +1,16 @@
+package model;
+
 /**
  * Created by brallan on 09/06/16.
  */
 public class TicTacToeModel {
 
-    private final int SIZE = 9;
-    private final int EMPTY = 0;
-    private final int PLAYER1 = 1;
-    private final int PLAYER2 = 2;
+    private final int SIZE;
 
     /**
      * if true, is player 1 turn, else is player 2 turn
      */
-    private boolean turn = true;
+    private boolean turn;
 
     /**
      * playing zone. It has the next distribution:
@@ -24,22 +23,39 @@ public class TicTacToeModel {
      * | 6 | 7 | 8 |
      * +---+---+---+
      */
-    private int[] board = new int[SIZE];
+    private int[] board;
+
+    public TicTacToeModel() {
+        SIZE = 9;
+        board = new int[SIZE];
+        turn = true;
+    }
 
     /**
      * Here occurs the verifications to find a winner
      * @param pPosition where a player is playing
      */
-    public void play(int pPosition) {
+    public boolean play(int pPosition) {
+        boolean isWinner = false;
+
         try {
-            if (board[pPosition] != EMPTY) {
-                board[pPosition] = turn ? PLAYER1 : PLAYER2;
-                checkWinner(pPosition);
+
+            int EMPTY = 0;
+
+            if (board[pPosition] == EMPTY) {
+                int player1 = 1;
+                int player2 = 2;
+
+                board[pPosition] = turn ? player1 : player2;
+                isWinner = checkWinner(pPosition);
+                turn = !turn;
             }
         }
         catch(ArrayIndexOutOfBoundsException e) {
             System.out.println(e);
         }
+
+        return isWinner;
     }
 
     /**
@@ -48,7 +64,7 @@ public class TicTacToeModel {
      * @return
      */
     private boolean checkWinner(int pPosition) {
-        boolean winnerColumn, winnerRow;
+        boolean winnerColumn, winnerRow, winnerDiagonal;
         int columnToCheck, rowToCheck;
 
         if(pPosition < 3) { // first row
@@ -66,8 +82,9 @@ public class TicTacToeModel {
 
         winnerColumn = checkColumn(columnToCheck);
         winnerRow = checkRow(rowToCheck);
+        winnerDiagonal = (pPosition % 2 == 0) ? checkDiagonals() : false;
 
-        return winnerColumn || winnerRow;
+        return winnerColumn || winnerRow || winnerDiagonal;
     }
 
     /**
@@ -101,6 +118,25 @@ public class TicTacToeModel {
         try {
             statement = (board[pPosition] == board[pPosition + 3]) &&
                     (board[pPosition + 3] == board[pPosition + 6]);
+        }
+        catch  (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e);
+            statement = false;
+        }
+
+        return statement;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private boolean checkDiagonals() {
+        boolean statement;
+
+        try {
+            statement = ((board[0] == board[4]) && (board[4] == board[8])) ||
+                    ((board[2] == board[4]) && (board[4] == board[6]));
         }
         catch  (ArrayIndexOutOfBoundsException e) {
             System.out.println(e);
