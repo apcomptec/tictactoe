@@ -11,22 +11,22 @@
 
 </head>
 <body>
-    <table id="tblBoard" onclick="detectIndex()" width="300" height="300" class="grid">
+    <table id="tblBoard" width="300" height="300" class="grid">
         <tbody>
         <tr>
-            <td id="field1"></td>
-            <td id="field2"></td>
-            <td id="field3"></td>
+            <td onclick="drawBoard(this, 0)"></td>
+            <td onclick="drawBoard(this, 1)"></td>
+            <td onclick="drawBoard(this, 2)"></td>
         </tr>
         <tr>
-            <td id="field4"></td>
-            <td id="field5"></td>
-            <td id="field6"></td>
+            <td onclick="drawBoard(this, 3)"></td>
+            <td onclick="drawBoard(this, 4)"></td>
+            <td onclick="drawBoard(this, 5)"></td>
         </tr>
         <tr>
-            <td id="field7"></td>
-            <td id="field8"></td>
-            <td id="field9"></td>
+            <td onclick="drawBoard(this, 6)"></td>
+            <td onclick="drawBoard(this, 7)"></td>
+            <td onclick="drawBoard(this, 8)"></td>
         </tr>
         </tbody>
     </table>

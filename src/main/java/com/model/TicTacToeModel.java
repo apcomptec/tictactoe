@@ -22,6 +22,10 @@ public class TicTacToeModel {
      * +---+---+---+
      * | 6 | 7 | 8 |
      * +---+---+---+
+     *
+     * if the player 1 has occupied certain square, it has the value 1
+     * else if the player 2 has some square, it has a 2
+     * finally if the square is empty, there is a 0
      */
     private int[] board;
 
@@ -135,8 +139,8 @@ public class TicTacToeModel {
         boolean statement;
 
         try {
-            statement = ((board[0] == board[4]) && (board[4] == board[8])) ||
-                    ((board[2] == board[4]) && (board[4] == board[6]));
+            statement = ((board[0] != 0) && (board[0] == board[4]) && (board[4] == board[8])) ||
+                    ((board[2] != 0) && (board[2] == board[4]) && (board[4] == board[6]));
         }
         catch  (ArrayIndexOutOfBoundsException e) {
             System.out.println(e);
@@ -144,5 +148,14 @@ public class TicTacToeModel {
         }
 
         return statement;
+    }
+
+    public int getSquare(int pPosition) {
+        return board[pPosition];
+    }
+
+    public void restart() {
+        board = new int[SIZE];
+        turn = true;
     }
 }
