@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TicTacToeModelTest {
 
     private TicTacToeModel ttt = new TicTacToeModel();
-    
+
     @Test
     public void play() throws Exception {
 //        // TEST 1

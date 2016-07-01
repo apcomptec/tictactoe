@@ -1,4 +1,4 @@
-package model;
+package com.model;
 
 /**
  * Created by brallan on 09/06/16.
@@ -40,9 +40,9 @@ public class TicTacToeModel {
 
         try {
 
-            int EMPTY = 0;
+            int empty = 0;
 
-            if (board[pPosition] == EMPTY) {
+            if (board[pPosition] == empty) {
                 int player1 = 1;
                 int player2 = 2;
 
@@ -82,7 +82,7 @@ public class TicTacToeModel {
 
         winnerColumn = checkColumn(columnToCheck);
         winnerRow = checkRow(rowToCheck);
-        winnerDiagonal = (pPosition % 2 == 0) ? checkDiagonals() : false;
+        winnerDiagonal = (pPosition % 2 == 0) ? checkDiagonals() : false; // is pPosition in a diagonal?
 
         return winnerColumn || winnerRow || winnerDiagonal;
     }
