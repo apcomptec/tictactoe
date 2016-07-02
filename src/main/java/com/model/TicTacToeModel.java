@@ -29,10 +29,16 @@ public class TicTacToeModel {
      */
     private int[] board;
 
+    /**
+     * Counter of moves
+     */
+    private int numberOfMoves;
+
     public TicTacToeModel() {
         SIZE = 9;
         board = new int[SIZE];
         turn = true;
+        numberOfMoves = 0;
     }
 
     /**
@@ -53,6 +59,7 @@ public class TicTacToeModel {
                 board[pPosition] = turn ? player1 : player2;
                 isWinner = checkWinner(pPosition);
                 turn = !turn;
+                numberOfMoves++;
             }
         }
         catch(ArrayIndexOutOfBoundsException e) {
@@ -132,7 +139,7 @@ public class TicTacToeModel {
     }
 
     /**
-     *
+     * Check for a winner at the diagonals
      * @return
      */
     private boolean checkDiagonals() {
@@ -150,12 +157,29 @@ public class TicTacToeModel {
         return statement;
     }
 
+    /**
+     *
+     * @param pPosition
+     * @return content of the square in pPosition
+     */
     public int getSquare(int pPosition) {
         return board[pPosition];
     }
 
+    /**
+     *
+     * @return Number of moves done
+     */
+    public int getNumberOfMoves() {
+        return numberOfMoves;
+    }
+
+    /**
+     * Restart the game
+     */
     public void restart() {
         board = new int[SIZE];
         turn = true;
+        numberOfMoves = 0;
     }
 }
