@@ -31,6 +31,16 @@ public class TicTacToeController {
         return Integer.toString(ticTacToe.getSquare(pos));
     }
 
+    @RequestMapping(value = "/moves", method = RequestMethod.GET)
+    @ResponseBody
+    public int moves() {
+        int moves = ticTacToe.getNumberOfMoves();
+
+//        if ( moves == 9 ) ticTacToe.restart();
+
+        return moves;
+    }
+
     @RequestMapping(value = "/winner", method = RequestMethod.GET)
     @ResponseBody
     public String winner() {
